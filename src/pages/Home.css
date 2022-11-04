@@ -1,0 +1,23 @@
+.homePage {
+    padding: 30px;
+    display: flex;
+}
+
+.roomsList {
+}
+
+.roomOverview {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 500px;
+}
+
+.nameList {
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.addRoom {
+
+}

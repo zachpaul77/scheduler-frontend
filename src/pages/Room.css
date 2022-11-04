@@ -1,0 +1,11 @@
+.roomPage {
+    display: flex;
+    height: 100%;
+}
+
+.roomContent {
+    margin-top: 20px;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+}

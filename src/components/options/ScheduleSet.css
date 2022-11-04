@@ -1,0 +1,11 @@
+.scheduleSetForm > div {
+    margin-top: 10px;
+}
+
+.removeMemberSchedules label, input{
+    font-size: 18px;
+    display: inline;
+}
+.removeMemberSchedules input{
+    transform: scale(1.2);
+}

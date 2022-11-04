@@ -1,0 +1,23 @@
+.groupList {
+    padding: 5px;
+    border: 1px;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 100%;
+    margin: auto;
+}
+
+.selectGroup {
+    padding: 4px;
+    margin: 2px;
+    background-color: #e3e3e3;
+}
+
+.selectGroup.selected {
+    background-color: blue;
+    color: white;
+}
