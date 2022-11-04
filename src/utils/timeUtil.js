@@ -1,6 +1,3 @@
-const getPrevDay = (date) => { return date - 86400000 }
-const getNextDay = (date) => { return date + 86400000 }
-const addOneHour = (date) => { return date + 3600000 }
 const add15min = (date) => { return date + 900000 }
 
 
@@ -24,7 +21,7 @@ const getPmOffsetDateInfo = (data, isFirstDay, startDay) => {
                 ignored = true
             }
             if (data.minuteOffset) {
-                if (i==data.amHours-1 && j>=data.minuteOffset) {
+                if (i===data.amHours-1 && j>=data.minuteOffset) {
                     ignored = true
                 }
             }
@@ -51,7 +48,7 @@ const getPmOffsetDateInfo = (data, isFirstDay, startDay) => {
                 ignored = true
             }
             if (data.minuteOffset) {
-                if (i==0 && j<data.minuteOffset) {
+                if (i===0 && j<data.minuteOffset) {
                     ignored = true
                 }
             }
@@ -84,7 +81,7 @@ const getDateInfo = (data, isFirstDay) => {
         for (let j=0; j<=45; j+=15) {
             let ignored = false
             if (data.minuteOffset) {
-                if ((i==0 && j<data.minuteOffset) || (i==data.totalTime-1 && j>=data.minuteOffset)) {
+                if ((i===0 && j<data.minuteOffset) || (i===data.totalTime-1 && j>=data.minuteOffset)) {
                     ignored = true
                 }
             }

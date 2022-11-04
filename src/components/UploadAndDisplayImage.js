@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import axios from 'axios'
 import { getRandomProfileImg } from "../utils/util";

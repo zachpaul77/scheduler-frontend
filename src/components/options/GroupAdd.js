@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
-import { useAuthContext } from '../../hooks/useAuthContext'
+//import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 
 const GroupAdd = ({ room, showMainSchedule }) => {
     const { roomDispatch } = useRoomsContext()
-    const { user } = useAuthContext()
+    //const { user } = useAuthContext()
     const [error, setError] = useState(null)
     const [values, setValues] = useState({
         name: null,

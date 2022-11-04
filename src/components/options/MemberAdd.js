@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
-import { useAuthContext } from '../../hooks/useAuthContext'
 import axios from 'axios'
+//import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import './MemberAdd.css'
 import SelectGroups from "../SelectGroups"
@@ -10,8 +10,8 @@ import { getRandomProfileImg } from "../../utils/util"
 
 
 const MemberAdd = ({ room, showMainSchedule }) => {
+    //const { user } = useAuthContext()
     const { memberDispatch } = useRoomsContext()
-    const { user } = useAuthContext()
     const [error, setError] = useState(null)
     const selectedGroups = useRef([])
     const memberName = useRef(null)
