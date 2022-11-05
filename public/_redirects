@@ -1,0 +1,2 @@
+/api/* https://scheduler-backend-three.vercel.app/api/:splat 200
+/* /index.html 200
