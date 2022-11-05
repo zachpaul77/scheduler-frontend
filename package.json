@@ -1,4 +1,5 @@
 {
+  "proxy": "https://scheduler-backend-three.vercel.app/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
