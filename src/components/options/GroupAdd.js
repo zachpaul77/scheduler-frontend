@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
-import { serverDomain } from "../../utils/util"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 
@@ -17,7 +16,7 @@ const GroupAdd = ({ room, showMainSchedule }) => {
 
         const group = {name: values.name}
 
-        const response = await fetch(`${serverDomain}/api/room/create_group/${room._id}`, {
+        const response = await fetch(`/api/room/create_group/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ group }),
             headers: {

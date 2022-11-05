@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
-import { serverDomain } from "../utils/util"
 import axios from 'axios'
 import { getRandomProfileImg } from "../utils/util";
 
@@ -16,7 +15,7 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
                 const formData = new FormData()
                 const fileName = member._id
                 formData.append('image', file, fileName)
-                axios.post(`${serverDomain}/api/room/update_member_img/${room._id}`, formData)
+                axios.post(`/api/room/update_member_img/${room._id}`, formData)
                     .then(res => {
                         memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: res.data, member: member})
                     })
@@ -36,7 +35,7 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
         
         if (member) {
             const newProfileImg = getRandomProfileImg()
-            axios.post(`${serverDomain}/api/room/clear_member_img/${room._id}`, {newProfileImg, memberId: member._id})
+            axios.post(`/api/room/clear_member_img/${room._id}`, {newProfileImg, memberId: member._id})
             .then(res => {
                 memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: newProfileImg, member: member})
             })

@@ -1,6 +1,3 @@
-export const serverDomain = "https://scheduler-backend-three.vercel.app"
-
-
 export const getRandomProfileImg = () => {
     const list = ['blue', 'brown', 'green', 'magenta', 'orange', 'purple', 'red', 'turquoise']
 
