@@ -8,4 +8,6 @@
   from = "/api/user/login"
   to = "https://scheduler-backend-three.vercel.app/api/user/login"
   status = 200
+  method = "POST"
+  headers = {"Content-Type" : "application/json"}
   
