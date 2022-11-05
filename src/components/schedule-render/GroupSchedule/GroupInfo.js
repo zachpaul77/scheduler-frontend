@@ -1,6 +1,6 @@
 import { useRoomsContext, Actions } from "../../../hooks/useRoomsContext"
 import { useScheduleContext } from "../../../hooks/useScheduleContext"
-import { serverDomain } from "../utils/util"
+import { serverDomain } from "../../../utils/util"
 // Components
 import './GroupSchedule.css'
 import MemberName from "../../MemberName"

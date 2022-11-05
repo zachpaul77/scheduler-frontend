@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
-import { serverDomain } from "../utils/util"
+import { serverDomain } from "../../utils/util"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import DatePicker from "react-multi-date-picker";

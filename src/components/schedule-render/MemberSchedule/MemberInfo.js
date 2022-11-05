@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../../hooks/useRoomsContext"
 import { useScheduleContext } from "../../../hooks/useScheduleContext"
-import { serverDomain } from "../utils/util"
+import { serverDomain } from "../../../utils/util"
 // Components
 import SelectGroups from "../../SelectGroups"
 import UploadAndDisplayImage from "../../UploadAndDisplayImage"

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
 import axios from 'axios'
-import { serverDomain } from "../utils/util"
+import { serverDomain } from "../../utils/util"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import './MemberAdd.css'
