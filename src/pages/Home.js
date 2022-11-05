@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { serverDomain } from "../utils/util"
 import './Home.css'
 // components
 import RoomDetails from '../components/RoomDetails'
@@ -12,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const response = await fetch('/api/room/rooms', {
+      const response = await fetch(`${serverDomain}/api/room/rooms`, {
         headers: {'Authorization': `Bearer ${user.token}`},
       })
       const json = await response.json()

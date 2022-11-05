@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../../hooks/useRoomsContext"
 import { useScheduleContext } from "../../../hooks/useScheduleContext"
+import { serverDomain } from "../utils/util"
 // Components
 import SelectGroups from "../../SelectGroups"
 import UploadAndDisplayImage from "../../UploadAndDisplayImage"
@@ -17,7 +18,7 @@ const MemberInfo = ({ member, editable, setEditable, showMainSchedule}) => {
     const onClickGroup = async() => {
         if (!editable) return
 
-        const response = await fetch(`/api/room/update_member_groups/${room._id}`, {
+        const response = await fetch(`${serverDomain}/api/room/update_member_groups/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ groups: selectedGroups.current, memberId: member._id }),
             headers: {
@@ -35,7 +36,7 @@ const MemberInfo = ({ member, editable, setEditable, showMainSchedule}) => {
         let result = window.confirm(`Delete member: ${member.name}?`)
         if (!result) return;
 
-        const response = await fetch(`/api/room/delete_member/${room._id}`, {
+        const response = await fetch(`${serverDomain}/api/room/delete_member/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ memberId: member._id }),
             headers: {

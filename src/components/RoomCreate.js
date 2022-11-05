@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import { useAuthContext } from '../hooks/useAuthContext'
+import { serverDomain } from "../utils/util"
 
 const RoomCreate = () => {
   const { roomDispatch } = useRoomsContext()
@@ -43,7 +44,7 @@ const RoomCreate = () => {
       dates: dates
     }
 
-    const response = await fetch('/api/room/create', {
+    const response = await fetch(`${serverDomain}/api/room/create`, {
       method: 'POST',
       body: JSON.stringify({roomName, schedule}),
       headers: {

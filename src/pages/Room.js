@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import { ScheduleContextProvider } from '../context/ScheduleContext'
+import { serverDomain } from "../utils/util"
 //import { useAuthContext } from "../hooks/useAuthContext"
 // components
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
@@ -22,7 +23,7 @@ const Room = () => {
   // Get room json on page load
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await fetch(`/api/room`, {
+      const response = await fetch(`${serverDomain}/api/room`, {
         method: 'POST',
         body: JSON.stringify({room_id: room_id}),
         headers: {

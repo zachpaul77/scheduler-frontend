@@ -1,8 +1,12 @@
+export const serverDomain = "https://scheduler-backend-three.vercel.app"
+
+
 export const getRandomProfileImg = () => {
     const list = ['blue', 'brown', 'green', 'magenta', 'orange', 'purple', 'red', 'turquoise']
 
     return `/images/${list[Math.floor(Math.random() * list.length)]}-square.svg`
 }
+
 
 export const sortObjByKey = (obj, key) => {
     obj.sort((a, b) => {

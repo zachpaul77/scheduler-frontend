@@ -1,6 +1,7 @@
 import { useRoomsContext, Actions } from '../hooks/useRoomsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate } from 'react-router-dom'
+import { serverDomain } from '../utils/util'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
@@ -14,7 +15,7 @@ const RoomDetails = ({ room }) => {
     let result = window.confirm(`Are you sure you want to delete room: '${room.name}'?`)
     if (!result) return
 
-    const response = await fetch('/api/room/' + room._id, {
+    const response = await fetch(`${serverDomain}/api/room/${room._id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`

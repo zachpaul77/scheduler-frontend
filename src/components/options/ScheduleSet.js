@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
+import { serverDomain } from "../utils/util"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import DatePicker from "react-multi-date-picker";
@@ -33,7 +34,7 @@ const ScheduleSet = ({ showMainSchedule }) => {
         
         dateTimes.sort()
         
-        const response = await fetch(`/api/room/set_schedule/${room._id}`, {
+        const response = await fetch(`${serverDomain}/api/room/set_schedule/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({schedule: {dates: dateTimes, times: times.current},
                                   removeMemberSchedules: removeMemberSchedules.current}),
