@@ -1,6 +1,5 @@
 import { createContext, useState } from 'react'
 import { useRoomsContext, Actions } from '../hooks/useRoomsContext'
-import { serverDomain } from "../utils/util"
 
 export const ScheduleContext = createContext()
 
@@ -28,7 +27,7 @@ export const ScheduleContextProvider = ({ children }) => {
     const timeSlots = { timeSlots: { dateTimes: dateTimes, isSet: isSet, memberId: member._id } }
     
     // Send updated member times to server
-    const response = await fetch(`${serverDomain}/api/room/set_member_schedule/${room._id}`, {
+    const response = await fetch(`/api/room/set_member_schedule/${room._id}`, {
       method: 'POST',
       body: JSON.stringify(timeSlots),
       headers: {

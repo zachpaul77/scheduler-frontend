@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-import { serverDomain } from "../utils/util"
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
@@ -11,7 +10,7 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch(`${serverDomain}/api/user/signup`, {
+    const response = await fetch(`/api/user/signup`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })

@@ -1,6 +1,5 @@
 import { useRoomsContext, Actions } from "../../../hooks/useRoomsContext"
 import { useScheduleContext } from "../../../hooks/useScheduleContext"
-import { serverDomain } from "../../../utils/util"
 // Components
 import './GroupSchedule.css'
 import MemberName from "../../MemberName"
@@ -39,7 +38,7 @@ const GroupInfo = (props) => {
         let result = window.confirm(`Are you sure you want to delete group: '${selectedGroup.name}'?`)
         if (!result) return;
 
-        const response = await fetch(`${serverDomain}/api/room/delete_group/${room._id}`, {
+        const response = await fetch(`/api/room/delete_group/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ groupName: selectedGroup.name }),
             headers: {

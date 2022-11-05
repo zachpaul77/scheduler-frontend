@@ -1,7 +1,6 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
 import axios from 'axios'
-import { serverDomain } from "../../utils/util"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import './MemberAdd.css'
@@ -25,7 +24,7 @@ const MemberAdd = ({ room, showMainSchedule }) => {
                         groups: selectedGroups.current,
                         profile_img: getRandomProfileImg()}
 
-        const response = await fetch(`${serverDomain}/api/room/create_member/${room._id}`, {
+        const response = await fetch(`/api/room/create_member/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ member }),
             headers: {
@@ -47,7 +46,7 @@ const MemberAdd = ({ room, showMainSchedule }) => {
                 const formData = new FormData()
                 const fileName = json._id
                 formData.append('image', profileImg.current, fileName)
-                axios.post(`${serverDomain}/api/room/update_member_img/${room._id}`, formData)
+                axios.post(`/api/room/update_member_img/${room._id}`, formData)
                     .then(res => {
                         memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: res.data, member: json})
                     })
