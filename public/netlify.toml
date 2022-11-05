@@ -5,8 +5,7 @@
   force = false
 
 [[redirects]]
-  from = "/api/*"
-  to = "https://scheduler-backend-three.vercel.app/api/:splat"
+  from = "/api/user/login"
+  to = "https://scheduler-backend-three.vercel.app/api/user/login"
   status = 200
-  force = true
   
