@@ -1,17 +1,16 @@
 import { useState, useRef } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
-import axios from 'axios'
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 import './MemberAdd.css'
 import SelectGroups from "../SelectGroups"
 import UploadAndDisplayImage from "../UploadAndDisplayImage"
-import { getRandomProfileImg } from "../../utils/util"
+import { cloudinaryUpload, getRandomProfileImg } from "../../utils/util"
 
 
-const MemberAdd = ({ room, showMainSchedule }) => {
+const MemberAdd = ({ showMainSchedule }) => {
     //const { user } = useAuthContext()
-    const { memberDispatch } = useRoomsContext()
+    const { room, memberDispatch } = useRoomsContext()
     const [error, setError] = useState(null)
     const selectedGroups = useRef([])
     const memberName = useRef(null)
@@ -43,15 +42,10 @@ const MemberAdd = ({ room, showMainSchedule }) => {
         if (response.ok) {
             memberDispatch({type: Actions.CREATE_MEMBER, payload: json})
             if (profileImg.current) {
-                const formData = new FormData()
-                const fileName = json._id
-                formData.append('image', profileImg.current, fileName)
-                axios.post(`/api/room/update_member_img/${room._id}`, formData)
-                    .then(res => {
-                        memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: res.data, member: json})
-                    })
+                const imgURL = await cloudinaryUpload(json._id, room._id, profileImg.current)
+                if (imgURL) { memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: imgURL, member: json}) }
             }
-
+            
             showMainSchedule()
         }
     }

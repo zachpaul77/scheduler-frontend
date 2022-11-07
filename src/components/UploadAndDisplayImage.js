@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import axios from 'axios'
-import { getRandomProfileImg } from "../utils/util";
+import { cloudinaryUpload, getRandomProfileImg } from "../utils/util";
 
 const UploadAndDisplayImage = ({ member, profileImg }) => {
     const {room, memberDispatch} = useRoomsContext()
@@ -9,22 +9,17 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
 
     const onChangeImg = async(e) => {
         const file = e.target.files[0]
-
         if (file.type.split('/')[0] === 'image') {
+            const localURL = URL.createObjectURL(file)
+            setSelectedImage(localURL)
             if (member) {
-                const formData = new FormData()
-                const fileName = member._id
-                formData.append('image', file, fileName)
-                axios.post(`/api/room/update_member_img/${room._id}`, formData)
-                    .then(res => {
-                        memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: res.data, member: member})
-                    })
+                memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: localURL, member})
+                cloudinaryUpload(member._id, room._id, file)
             }
             else if (profileImg) {
                 profileImg.current = file
             }
 
-            setSelectedImage(URL.createObjectURL(file))
         } else {
             e.preventDefault()
         }
