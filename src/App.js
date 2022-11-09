@@ -17,8 +17,8 @@ function App() {
         <div className="pages">
           <Routes>
             <Route 
-              path="/" 
-              element={user ? <Home /> : <Navigate to="/login" />} 
+              path="/"
+              element={user ? <Home /> : <Login />}
             />
             <Route 
               path="/:room_id" 
