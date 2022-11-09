@@ -38,7 +38,7 @@ const GroupInfo = (props) => {
         let result = window.confirm(`Are you sure you want to delete group: '${selectedGroup.name}'?`)
         if (!result) return;
 
-        const response = await fetch(`/api/room/delete_group/${room._id}`, {
+        fetch(`/api/room/delete_group/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ groupName: selectedGroup.name }),
             headers: {
@@ -46,10 +46,7 @@ const GroupInfo = (props) => {
             }
         })
         
-        if (response.ok) {
-            roomDispatch({type: Actions.DELETE_GROUP, payload: selectedGroup.name})
-            props.showMainSchedule()
-        }
+        roomDispatch({type: Actions.DELETE_GROUP, payload: selectedGroup.name})
     }
 
     return (

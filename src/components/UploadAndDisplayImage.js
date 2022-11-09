@@ -13,8 +13,8 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
             const localURL = URL.createObjectURL(file)
             setSelectedImage(localURL)
             if (member) {
-                memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: localURL, member})
-                cloudinaryUpload(member._id, room._id, file)
+                const secure_url = await cloudinaryUpload(member._id, room._id, file)
+                memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: secure_url, member})
             }
             else if (profileImg) {
                 profileImg.current = file
@@ -30,10 +30,8 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
         
         if (member) {
             const newProfileImg = getRandomProfileImg()
+            memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: newProfileImg, member: member})
             axios.post(`/api/room/clear_member_img/${room._id}`, {newProfileImg, memberId: member._id})
-            .then(res => {
-                memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: newProfileImg, member: member})
-            })
         }
         else if (profileImg) {
             profileImg.current = null

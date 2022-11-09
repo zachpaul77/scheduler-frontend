@@ -12,12 +12,14 @@ const MemberAdd = ({ showMainSchedule }) => {
     //const { user } = useAuthContext()
     const { room, memberDispatch } = useRoomsContext()
     const [error, setError] = useState(null)
+    const [creatingMember, setCreatingMember] = useState(false)
     const selectedGroups = useRef([])
     const memberName = useRef(null)
     const profileImg = useRef(null)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setCreatingMember(true)
 
         const member = {name: memberName.current,
                         groups: selectedGroups.current,
@@ -33,6 +35,7 @@ const MemberAdd = ({ showMainSchedule }) => {
         const json = await response.json()
         
         if (!response.ok) {
+            setCreatingMember(false)
             if (json.error) {
                 setError(json.error)
             } else {
@@ -56,6 +59,9 @@ const MemberAdd = ({ showMainSchedule }) => {
 
     return (
         <div className="memberAdd">
+
+            {!creatingMember ?
+            <>
             <h1>Create a member</h1>
 
             <form className="addMemberForm" onSubmit={e => handleSubmit(e)}>
@@ -77,6 +83,9 @@ const MemberAdd = ({ showMainSchedule }) => {
             </form>
             
             {error && <div className="error">{error}</div>}
+            </>
+            
+            : <h1>Creating member...</h1>}
         </div>
     )
 }

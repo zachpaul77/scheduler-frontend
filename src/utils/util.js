@@ -32,8 +32,6 @@ export const cloudinaryUpload = async(memberId, roomId, file) => {
     })
 
     const { signature, timestamp } = await response.json()
-    console.log(signature)
-    console.log(timestamp)
     if (!response.ok) return false
 
     // Upload to cloudinary using signature

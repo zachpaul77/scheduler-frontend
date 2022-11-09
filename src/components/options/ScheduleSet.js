@@ -10,6 +10,7 @@ import './ScheduleSet.css'
 const ScheduleSet = ({ showMainSchedule }) => {
     //const { user } = useAuthContext()
     const { room, roomDispatch, memberDispatch } = useRoomsContext()
+    const [creatingSchedule, setCreatingSchedule] = useState(false)
     const [error, setError] = useState(null)
     const [dates, setDates] = useState([])
     const removeMemberSchedules = useRef(false)
@@ -21,6 +22,7 @@ const ScheduleSet = ({ showMainSchedule }) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setCreatingSchedule(true)
         times.current.total = 1 + times.current.end - times.current.begin
         
         // Convert date to epoch time
@@ -44,6 +46,7 @@ const ScheduleSet = ({ showMainSchedule }) => {
         const json = await response.json()
         
         if (!response.ok) {
+            setCreatingSchedule(false)
             setError(json.error)
         }
         if (response.ok) {
@@ -61,6 +64,8 @@ const ScheduleSet = ({ showMainSchedule }) => {
 
     return (
         <div className="scheduleSet">
+            {!creatingSchedule ?
+            <>
             <h1>Set a schedule</h1>
 
             <form className="scheduleSetForm" onSubmit={e => handleSubmit(e)}>
@@ -88,6 +93,10 @@ const ScheduleSet = ({ showMainSchedule }) => {
 
                 {error && <div className="error">{error}</div>}
             </form>
+            </>
+
+            : <h1>Setting schedule...</h1>}
+
         </div>
     )
 }

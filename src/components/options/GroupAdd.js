@@ -3,16 +3,18 @@ import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
 
-const GroupAdd = ({ room, showMainSchedule }) => {
-    const { roomDispatch } = useRoomsContext()
+const GroupAdd = ({ showMainSchedule }) => {
+    const { room, roomDispatch } = useRoomsContext()
     //const { user } = useAuthContext()
     const [error, setError] = useState(null)
+    const [creatingGroup, setCreatingGroup] = useState(false)
     const [values, setValues] = useState({
         name: null,
     })
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setCreatingGroup(true)
 
         const group = {name: values.name}
 
@@ -26,6 +28,7 @@ const GroupAdd = ({ room, showMainSchedule }) => {
         const json = await response.json()
         
         if (!response.ok) {
+            setCreatingGroup(false)
             if (json.error) {
                 setError(json.error)
             } else {
@@ -44,6 +47,8 @@ const GroupAdd = ({ room, showMainSchedule }) => {
 
     return (
         <div className="member-add">
+            {!creatingGroup ?
+            <>
             <h1>Create a group</h1>
                 
             <form onSubmit={e => handleSubmit(e)}>
@@ -61,6 +66,10 @@ const GroupAdd = ({ room, showMainSchedule }) => {
             </form>
 
             {error && <div className="error">{error}</div>}
+            </>
+
+            : <h1>Creating group...</h1>}
+
         </div>
     )
 }

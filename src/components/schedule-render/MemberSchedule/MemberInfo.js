@@ -16,26 +16,23 @@ const MemberInfo = ({ member, editable, setEditable, showMainSchedule}) => {
     // On update member groups, send to server
     const onClickGroup = async() => {
         if (!editable) return
-
-        const response = await fetch(`/api/room/update_member_groups/${room._id}`, {
+        
+        fetch(`/api/room/update_member_groups/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ groups: selectedGroups.current, memberId: member._id }),
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         })
-        const json = await response.json()
 
-        if (response.ok) {
-            memberDispatch({type: Actions.UPDATE_MEMBER_GROUPS, payload: json, member: member})
-        }
+        memberDispatch({type: Actions.UPDATE_MEMBER_GROUPS, payload: selectedGroups.current, member: member})
     }
 
     const deleteMember = async() => {
         let result = window.confirm(`Delete member: ${member.name}?`)
         if (!result) return;
 
-        const response = await fetch(`/api/room/delete_member/${room._id}`, {
+        fetch(`/api/room/delete_member/${room._id}`, {
             method: 'POST',
             body: JSON.stringify({ memberId: member._id }),
             headers: {
@@ -43,10 +40,8 @@ const MemberInfo = ({ member, editable, setEditable, showMainSchedule}) => {
             }
         })
         
-        if (response.ok) {
-            memberDispatch({type: Actions.DELETE_MEMBER, payload: member._id})
-            showMainSchedule()
-        }
+        memberDispatch({type: Actions.DELETE_MEMBER, payload: member._id})
+        showMainSchedule()
     }
 
     const clickSelectAll = () => {
@@ -68,7 +63,6 @@ const MemberInfo = ({ member, editable, setEditable, showMainSchedule}) => {
             })
         })
         
-        //setSelectedTimeslots(selectAllList)
         saveMemberSchedule(!selectAll, member, selectAllList)
         setSelectAll(!selectAll)
     }

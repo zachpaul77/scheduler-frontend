@@ -5,8 +5,8 @@ import { ScheduleContextProvider } from '../context/ScheduleContext'
 //import { useAuthContext } from "../hooks/useAuthContext"
 // components
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
-import './Room.css';
-import './Sidebar.css';
+import './Room.css'
+import './Sidebar.css'
 import MemberAdd from '../components/options/MemberAdd'
 import GroupAdd from '../components/options/GroupAdd'
 import ScheduleSet from '../components/options/ScheduleSet'
@@ -98,13 +98,13 @@ const Room = () => {
 
       <div className='roomContent'>
         { components === 'addMember' &&
-          <MemberAdd room={room} showMainSchedule={showMainSchedule}/>}
+          <MemberAdd showMainSchedule={showMainSchedule}/>}
 
         { components === 'addGroup' &&
-          <GroupAdd room={room} showMainSchedule={showMainSchedule}/>}
+          <GroupAdd showMainSchedule={showMainSchedule}/>}
           
         { components === 'setSchedule' &&
-          <ScheduleSet room={room} showMainSchedule={showMainSchedule}/>}
+          <ScheduleSet showMainSchedule={showMainSchedule}/>}
 
         <ScheduleContextProvider>
           { components === 'mainSchedule' &&
