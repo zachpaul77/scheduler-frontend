@@ -14,17 +14,14 @@ const RoomDetails = ({ room }) => {
     let result = window.confirm(`Are you sure you want to delete room: '${room.name}'?`)
     if (!result) return
 
-    const response = await fetch(`/api/room/${room._id}`, {
+    roomDispatch({type: Actions.DELETE_ROOM, payload: room._id})
+
+    fetch(`/api/room/${room._id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`
       }
     })
-    const json = await response.json()
-
-    if (response.ok) {
-      roomDispatch({type: Actions.DELETE_ROOM, payload: json})
-    }
   }
 
   return (

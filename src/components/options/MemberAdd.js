@@ -44,12 +44,12 @@ const MemberAdd = ({ showMainSchedule }) => {
         }
         if (response.ok) {
             memberDispatch({type: Actions.CREATE_MEMBER, payload: json})
+            showMainSchedule()
+            
             if (profileImg.current) {
                 const imgURL = await cloudinaryUpload(json._id, room._id, profileImg.current)
                 if (imgURL) { memberDispatch({type: Actions.UPDATE_MEMBER_IMG, payload: imgURL, member: json}) }
             }
-            
-            showMainSchedule()
         }
     }
 
