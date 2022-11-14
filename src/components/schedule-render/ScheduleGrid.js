@@ -93,7 +93,6 @@ export const ScheduleGrid = React.memo((props) => {
                             clickedSlot={clickedSlot}
                             onMouseLeave={onMouseLeave}
                             selectionInProgress={selectedTimeslots.some(data => data[0]===i && data[1]===j )}
-                            members={props.groupMembers}
                             indexes={[i, j]} />
                     ))}
                 </div>

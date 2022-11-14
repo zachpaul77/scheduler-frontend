@@ -18,7 +18,7 @@ export const roomsReducer = (state, action) => {
       }
     case Actions.DELETE_ROOM:
       return {
-        rooms: state.rooms.filter((room) => room._id !== action.payload._id)
+        rooms: state.rooms.filter((room) => room._id !== action.payload)
       }
     case Actions.GET_ROOM:
       action.payload.timeData = fixScheduleTimezone(action.payload.schedule)

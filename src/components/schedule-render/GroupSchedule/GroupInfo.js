@@ -3,17 +3,25 @@ import { useScheduleContext } from "../../../hooks/useScheduleContext"
 // Components
 import './GroupSchedule.css'
 import MemberName from "../../MemberName"
+import { useRef } from "react"
 
 const GroupInfo = (props) => {
     const {room, roomDispatch, selectedGroup} = useRoomsContext()
     const {selectedTimeslots, showMemberNames, setShowMemberNames } = useScheduleContext()
-    
+    const dateTime = useRef(['.'])
+
+    const getDateTimeString = (value) => {
+        return new Date(value).toLocaleString('en-US', {weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true})
+    }
+
     const getAvailable = () => {
         const availableSelection = []
         const unavailableSet = new Set()
         
-        if (selectedTimeslots.length) {
-            selectedTimeslots.forEach(colRow => {
+        let availableTimeslots = selectedTimeslots.length ? selectedTimeslots : props.available
+
+        if (availableTimeslots.length) {
+            availableTimeslots.forEach(colRow => {
                 const value = room.timeData.dates[colRow[0]].timeSlots[colRow[1]].value
 
                 props.groupMembers.forEach(m => {
@@ -28,11 +36,20 @@ const GroupInfo = (props) => {
                     availableSelection.push(m.name)
                 }
             })
-
-            return availableSelection
         }
-        return props.available
+
+        dateTime.current = ['.']
+        if (availableTimeslots.length) {
+            dateTime.current = [getDateTimeString(availableTimeslots[0][2])]
+        }
+        if (availableTimeslots.length > 1) {
+            dateTime.current.push(getDateTimeString(availableTimeslots[availableTimeslots.length-1][2]))
+        }
+
+        return availableSelection
     }
+    const availableList = getAvailable()
+
 
     const deleteGroup = async() => {
         let result = window.confirm(`Are you sure you want to delete group: '${selectedGroup.name}'?`)
@@ -59,12 +76,19 @@ const GroupInfo = (props) => {
                 {showMemberNames ? 'Hide Member Names' : 'Show Member Names'}
             </button>
             
+            <div className="selectedDateTime" >
+                <br />
+                {dateTime.current[0]}
+                {dateTime.current.length > 1 &&
+                    <><br/>{dateTime.current[1]}</>}
+            </div>
+
             <div className="availability">
                 <div>Available:</div>
-                <div className="displayMembers available" style={{border: selectedTimeslots.length ? '3px solid #ffa952' : ''}}>
+                <div className="displayMembers available" style={{border: selectedTimeslots.length>1 ? '3px solid #ffa952' : ''}}>
                 {props.groupMembers.map(m => (
                         <span key={m._id}>
-                        {getAvailable().includes(m.name) &&
+                        {availableList.includes(m.name) &&
                             <span className="memberView">
                                 {showMemberNames ?
                                 <MemberName member={m} />
@@ -78,7 +102,7 @@ const GroupInfo = (props) => {
                 <div className="displayMembers unavailable">
                     {props.groupMembers.map(m => (
                         <span key={m._id}>
-                        {!(getAvailable().includes(m.name)) &&
+                        {!(availableList.includes(m.name)) &&
                             <span className="memberView">
                                 {showMemberNames ?
                                 <MemberName member={m} />

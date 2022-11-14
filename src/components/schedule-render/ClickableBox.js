@@ -6,7 +6,7 @@ const white = [255, 255, 255]
 const blue = [0, 102, 153]
 const purple = "#004264"
 
-const ClickableBox = ({ timeSlot, editable, isSet, clickedSlot, onMouseLeave, selectionInProgress, isGroupSchedule, setAvailable, members, indexes }) => {
+const ClickableBox = ({ timeSlot, editable, isSet, clickedSlot, onMouseLeave, selectionInProgress, isGroupSchedule, setAvailable, indexes }) => {
     const {room} = useRoomsContext()
     const { selectedTimeslots, setSelectedTimeslots } = useScheduleContext()
 
@@ -38,7 +38,7 @@ const ClickableBox = ({ timeSlot, editable, isSet, clickedSlot, onMouseLeave, se
         if (selectedTimeslots.length) {
             setSelectedTimeslots([])
         } else if (!timeSlot.ignored) {
-            setSelectedTimeslots([[indexes[0], indexes[1]]])
+            setSelectedTimeslots([[indexes[0], indexes[1], timeSlot.value]])
         }
 
         clickedSlot.current = {indexes: [indexes[0], indexes[1]], isSet: !isSet}
@@ -84,8 +84,12 @@ const ClickableBox = ({ timeSlot, editable, isSet, clickedSlot, onMouseLeave, se
                     if (!room.timeData.dates[i].timeSlots[j].ignored) {
                         const memberCount = room.timeData.dates[i].timeSlots[j].memberCount
 
-                        if (setAvailable) {
-                            selectedTimes.push([i, j])
+                        if (isGroupSchedule) {
+                            if ((i===startCol && j===startRow) || (i===endCol && j===endRow)) {
+                                selectedTimes.push([i, j, room.timeData.dates[i].timeSlots[j].value])
+                            } else {
+                                selectedTimes.push([i, j])
+                            }
                         }
                         else if (memberCount === -1 && !clickedSlot.current.isSet) {
                             selectedTimes.push([i, j])
@@ -101,10 +105,9 @@ const ClickableBox = ({ timeSlot, editable, isSet, clickedSlot, onMouseLeave, se
         }
     }
 
-    const updateAvailableMembers = () => {
+    const updateAvailableMembers = (e) => {
         if (!isGroupSchedule) return
-        const availableMembers = members.filter(m => m.time_slots.includes(timeSlot.value))
-        setAvailable(availableMembers.map(m => m = m.name))
+        setAvailable([[indexes[0], indexes[1], timeSlot.value]])
     }
 
     return (
