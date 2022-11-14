@@ -18,22 +18,29 @@ const Room = () => {
   const {room, selectedGroup, roomDispatch, members, memberDispatch} = useRoomsContext()
   const { room_id } = useParams()
   const [components, setShowComponent] = useState('mainSchedule')
+  const [invalidRoom, setInvalidRoom] = useState(false)
 
   // Get room json on page load
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await fetch(`/api/room`, {
-        method: 'POST',
-        body: JSON.stringify({room_id: room_id}),
-        headers: {
-          'Content-Type': 'application/json'
+      try {
+        const response = await fetch(`/api/room`, {
+          method: 'POST',
+          body: JSON.stringify({room_id: room_id}),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        const json = await response.json()
+  
+        if (response.ok) {
+          memberDispatch({type: Actions.GET_ALL_MEMBERS, payload: json.members})
+          roomDispatch({type: Actions.GET_ROOM, payload: json})
+        } else {
+          setInvalidRoom('404 - Room not found')
         }
-      })
-      const json = await response.json()
-
-      if (response.ok) {
-        memberDispatch({type: Actions.GET_ALL_MEMBERS, payload: json.members})
-        roomDispatch({type: Actions.GET_ROOM, payload: json})
+      } catch(e) {
+        setInvalidRoom('Error fetching room')
       }
     }
 
@@ -74,7 +81,8 @@ const Room = () => {
   }
 
   return (
-    <>{room ?
+    <>
+    {invalidRoom ? <h1>{invalidRoom}</h1> : room ?
     <div className="roomPage">
       <ProSidebar >
         <Menu iconShape="square">
