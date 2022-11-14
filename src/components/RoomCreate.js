@@ -73,6 +73,7 @@ const RoomCreate = () => {
         onChange={(e) => setRoomName(e.target.value)}
         value={roomName}
         className={"error"}
+        required={true}
       />
 
       <button>Add Room</button>
