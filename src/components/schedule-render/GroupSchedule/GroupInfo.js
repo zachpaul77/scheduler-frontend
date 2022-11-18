@@ -85,7 +85,7 @@ const GroupInfo = (props) => {
 
             <div className="availability">
                 <div>Available:</div>
-                <div className="displayMembers available" style={{border: selectedTimeslots.length>1 ? '3px solid #ffa952' : ''}}>
+                <div className="displayMembers available" style={{border: selectedTimeslots.length ? '3px solid #ffa952' : ''}}>
                 {props.groupMembers.map(m => (
                         <span key={m._id}>
                         {availableList.includes(m.name) &&
