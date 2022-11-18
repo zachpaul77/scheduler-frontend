@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRoomsContext, Actions } from "../hooks/useRoomsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 import './Home.css'
@@ -8,6 +8,7 @@ import RoomCreate from '../components/RoomCreate'
 
 const Home = () => {
   const {rooms, roomDispatch} = useRoomsContext()
+  const [loadingRooms, setLoadingRooms] = useState("Loading rooms...");
   const {user} = useAuthContext()
 
   useEffect(() => {
@@ -18,7 +19,10 @@ const Home = () => {
       const json = await response.json()
 
       if (response.ok) {
+        setLoadingRooms(null)
         roomDispatch({type: Actions.GET_ALL_ROOMS, payload: json})
+      } else {
+        setLoadingRooms("Error loading rooms.")
       }
     }
 
@@ -29,15 +33,21 @@ const Home = () => {
 
   return (
     <div className="homePage">
-      <div className="roomsList">
-        {rooms && rooms.map((room) => (
-          <RoomDetails key={room._id} room={room} />
-        ))}
-      </div>
 
-      <div className='addRoom'>
-        <RoomCreate />
-      </div>
+      {loadingRooms ? <h2>{loadingRooms}</h2> :
+        <>
+          <div className="roomsList">
+            {rooms && rooms.map((room) => (
+              <RoomDetails key={room._id} room={room} />
+            ))}
+          </div>
+    
+          <div className='addRoom'>
+            <RoomCreate />
+          </div>
+        </>
+      }
+
     </div>
   )
 }
