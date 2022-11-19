@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useRoomsContext, Actions } from "../../hooks/useRoomsContext"
 //import { useAuthContext } from '../../hooks/useAuthContext'
 // Components
+import "./GroupAdd.css"
 
 const GroupAdd = ({ showMainSchedule }) => {
     const { room, roomDispatch } = useRoomsContext()
@@ -46,26 +47,27 @@ const GroupAdd = ({ showMainSchedule }) => {
     };
 
     return (
-        <div className="member-add">
+        <div className="addGroup">
             {!creatingGroup ?
             <>
-            <h1>Create a group</h1>
-                
-            <form onSubmit={e => handleSubmit(e)}>
-                <label>Name:</label>
+            <form className="addGroupForm" onSubmit={e => handleSubmit(e)}>
+                <div>
+                    <h1>Create a group</h1>
+                </div>
+
                 <input
                     name="name"
                     type="text"
                     onChange={e => onChange(e)}
-                    required
+                    required="true"
+                    placeholder="Group name"
                 />
 
-                <br/><br/>
                 <button>Submit</button>
                 <button onClick={() => showMainSchedule()}>Cancel</button>
             </form>
 
-            {error && <div className="error">{error}</div>}
+            {error && <div className="errorMsg">{error}</div>}
             </>
 
             : <h1>Creating group...</h1>}

@@ -1,20 +1,18 @@
 .groupList {
-    padding: 5px;
-    border: 1px;
-    border-style: solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: fit-content;
-    max-width: 100%;
+    padding: 10px 20px;
+    border: 2px solid gray;
     margin: auto;
+    width: fit-content;
+    max-height: 250px;
+    overflow: auto;
 }
 
 .selectGroup {
-    padding: 4px;
+    padding: 8px 11px;
     margin: 2px;
     background-color: #e3e3e3;
+    border: 1px solid blue;
+    border-radius: 5px;
 }
 
 .selectGroup.selected {

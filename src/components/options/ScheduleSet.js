@@ -66,32 +66,28 @@ const ScheduleSet = ({ showMainSchedule }) => {
         <div className="scheduleSet">
             {!creatingSchedule ?
             <>
-            <h1>Set a schedule</h1>
-
             <form className="scheduleSetForm" onSubmit={e => handleSubmit(e)}>
                 <div>
-                    <label>Select Dates:</label>
-                    <DatePicker multiple={true} onChange={setDates} required={true} showOtherDays={true} />
+                    <h1>Set a schedule</h1>
                 </div>
+
+                <DatePicker multiple={true} onChange={setDates} required={true} showOtherDays={true} placeholder={"Select Dates"}/>
+                
                 <div>
-                    <label>Times:</label>
                     <span className="selTime">From: </span>
                     <TimeDropdown name="begin" onChange={onChangeTime}/>
                     <span className="selTime"> To: </span>
                     <TimeDropdown name="end" onChange={onChangeTime}/>
-                    <br />
                 </div>
                 <div className="removeMemberSchedules">
                     <input type="checkbox" htmlFor="removeMemberSchedules" id="removeMemberSchedules" onChange={()=>removeMemberSchedules.current = !removeMemberSchedules.current} />
                     <label htmlFor="removeMemberSchedules"> Delete member time data?</label>
                 </div>
                 
-                <div>
-                    <button>Submit</button>
-                    <button onClick={() => showMainSchedule()}>Cancel</button>
-                </div>
+                <button>Submit</button>
+                <button onClick={() => showMainSchedule()}>Cancel</button>
 
-                {error && <div className="error">{error}</div>}
+                {error && <div className="errorMsg">{error}</div>}
             </form>
             </>
 

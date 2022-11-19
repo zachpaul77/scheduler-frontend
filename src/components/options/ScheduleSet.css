@@ -1,5 +1,38 @@
+.scheduleSet {
+    margin-top: 25px;
+    width: fit-content;
+    display: flex;
+    height: 90%;
+    align-items: center;
+    margin: auto;
+    overflow: auto;
+}
+.scheduleSetForm {
+    border: 1px solid black;
+    padding: 40px;
+    border-radius: 15px;
+}
+
 .scheduleSetForm > div {
-    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.scheduleSet input {
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 20px;
+    padding: 11px 13px;
+}
+
+.scheduleSet .timeDropdown {
+    font-size: 14px;
+    padding: 5px;
+}
+
+.scheduleSet button {
+    font-size: 20px;
+    padding: 9px 11px;
 }
 
 .removeMemberSchedules label, input{

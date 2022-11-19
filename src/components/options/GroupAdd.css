@@ -1,38 +1,32 @@
-.memberAdd {
-    margin-top: 25px;
-    width: fit-content;
+.addGroup {
     display: flex;
     height: 90%;
+    width: fit-content;
     align-items: center;
     margin: auto;
     overflow: auto;
 }
 
-.addMemberForm {
+.addGroupForm {
     border: 1px solid black;
     padding: 40px;
     border-radius: 15px;
 }
 
-.memberAdd input {
+.addGroupForm input {
     margin: auto;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 16px;
     height: 20px;
     padding: 11px 13px;
 }
 
-.addMemberForm > div {
+.addGroupForm h1 {
     margin-bottom: 10px;
 }
 
-.memberAdd button {
-    margin-top: 20px;
+.addGroup button {
     font-size: 20px;
     padding: 9px 11px;
-}
-
-.selTime {
-    font-size: 18px;
 }

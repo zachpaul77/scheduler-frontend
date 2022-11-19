@@ -64,20 +64,20 @@ const RoomCreate = () => {
   }
 
   return (
-    <form className="create" onSubmit={handleSubmit}>
-      <h3>Add a New Room</h3>
+    <form className="roomCreate" onSubmit={handleSubmit}>
+      <h2>Add New Room</h2>
 
-      <label>Room Name:</label>
       <input
         type="text"
         onChange={(e) => setRoomName(e.target.value)}
         value={roomName}
         className={"error"}
         required={true}
+        placeholder="Room name"
       />
 
       <button>Add Room</button>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="errorMsg">{error}</div>}
     </form>
   )
 }

@@ -62,27 +62,30 @@ const MemberAdd = ({ showMainSchedule }) => {
 
             {!creatingMember ?
             <>
-            <h1>Create a member</h1>
-
             <form className="addMemberForm" onSubmit={e => handleSubmit(e)}>
-                <label>Name:</label>
+                <div>
+                    <h1>Create a member</h1>
+                </div>
                 <input
                     name="name"
                     type="text"
                     onChange={nameChange}
-                    required
+                    required="true"
+                    placeholder="Member Name"
                 />
 
-                <UploadAndDisplayImage profileImg={profileImg} />
+                <div>
+                    <label>(Optional) Profile picture:</label>
+                    <UploadAndDisplayImage profileImg={profileImg} />
+                </div>
+
                 <SelectGroups isEditable={true} selectedGroups={selectedGroups} />
                 
-                <div>
-                    <button>Submit</button>
-                    <button onClick={() => showMainSchedule()}>Cancel</button>
-                </div>
+                <button>Submit</button>
+                <button onClick={() => showMainSchedule()}>Cancel</button>
             </form>
             
-            {error && <div className="error">{error}</div>}
+            {error && <div className="errorMsg">{error}</div>}
             </>
             
             : <h1>Creating member...</h1>}

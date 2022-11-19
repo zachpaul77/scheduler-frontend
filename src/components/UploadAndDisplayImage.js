@@ -48,8 +48,6 @@ const UploadAndDisplayImage = ({ member, profileImg }) => {
 
         {!selectedImage &&
             <div>
-                {!member &&
-                    <label>(Optional) Profile picture:</label>}
                 <input
                     type="file"
                     name="myImage"

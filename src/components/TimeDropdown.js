@@ -35,7 +35,7 @@ const TimeDropdown = ({ name, onChange }) => {
   }
 
   return (
-    <select name={name} defaultValue={getDefaultValue()} onChange={(e) => onChange(name, e)} >
+    <select className="timeDropdown" name={name} defaultValue={getDefaultValue()} onChange={(e) => onChange(name, e)} >
       {
         getTimes().map((time) => (
           <option key={time.value} id={time.value}>

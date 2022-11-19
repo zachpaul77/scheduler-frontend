@@ -45,6 +45,10 @@ button {
   border: 1px solid darkred;
 }
 
+.errorMsg {
+  color: darkred;
+}
+
 .noSelect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

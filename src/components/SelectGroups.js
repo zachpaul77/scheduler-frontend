@@ -35,13 +35,23 @@ const SelectGroups = ({ isEditable, selectedGroups, onClickGroup }) => {
 
             {room.groups.length > 1 &&
             <div className="groupList">
-                <label>Groups:</label>
-                {room.groups.map((group) => (
-                    !group.all &&
-                    <div className={`selectGroup noSelect ${isSelected(group)}`} key={group._id} onMouseDown={handleClick} >
-                        {group.name}
-                    </div>
-                ))}
+                <label><strong>Groups:</strong></label>
+
+                {onClickGroup && !isEditable ?
+                    room.groups.map((group) => (
+                        !group.all && isSelected(group) &&
+                        <div className={`selectGroup noSelect ${isSelected(group)}`} key={group._id} onMouseDown={handleClick} >
+                            {group.name}
+                        </div>
+                    ))
+                    
+                    : room.groups.map((group) => (
+                        !group.all && 
+                        <div className={`selectGroup noSelect ${isSelected(group)}`} key={group._id} onMouseDown={handleClick} >
+                            {group.name}
+                        </div>
+                    ))
+                }
             </div>}
             
         </div>

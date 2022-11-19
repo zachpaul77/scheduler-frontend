@@ -36,14 +36,14 @@ const Home = () => {
 
       {loadingRooms ? <h2>{loadingRooms}</h2> :
         <>
+          <div className='addRoom'>
+            <RoomCreate />
+          </div>
+
           <div className="roomsList">
             {rooms && rooms.map((room) => (
               <RoomDetails key={room._id} room={room} />
             ))}
-          </div>
-    
-          <div className='addRoom'>
-            <RoomCreate />
           </div>
         </>
       }
